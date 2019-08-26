@@ -13,6 +13,18 @@ namespace MovieRentalAppMVC
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
+            //CUSTOM ROUTE
+            //this is how we define a custom route
+            routes.MapRoute(
+                "MoviesByReleasedDate",
+                "movies/released/{year}/{month}",
+                new { controller = "Movies", action = "ByReleaseDate" },
+                //to use constraints for {parameter} we can do as below:
+                new {year = @"\d{4}", month = @"\d{2}" });
+                //new { year = @"2015|2016", month = @"\d{2}" });
+
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

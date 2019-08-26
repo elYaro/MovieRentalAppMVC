@@ -21,6 +21,22 @@ namespace MovieRentalAppMVC.Controllers
         }
 
 
+
+
+        /*
+                MULTIPLE PARAMETERS
+                In order to sent multiple parapeters in URL we need costom routes. 
+                To do so we need to add custom routes in RoutesConfig.
+                We can use the old scool way: routes.MapRoute() or the new way routes.MapMvcArrtibuteRoutes(). 
+                Both are shown in RoutesConfig.cs
+        */
+
+                //GET: Movies/Released/1999/3
+                public ActionResult ByReleaseDate(int year, int month)
+                {
+
+                    return Content(string.Format("year = {0} and month = {1}", year, month)) ;
+                }
         
 
 
@@ -48,6 +64,8 @@ namespace MovieRentalAppMVC.Controllers
                     return Content(string.Format("page Index = {0} and sort By = {1}", pageIndex, sortBy));
                 }
         */
+
+
 
         /* 
                 ACTION PARAMETERS
