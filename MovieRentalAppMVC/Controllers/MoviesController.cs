@@ -1,4 +1,5 @@
 ﻿using MovieRentalAppMVC.Models;
+using MovieRentalAppMVC.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,19 @@ namespace MovieRentalAppMVC.Controllers
                 Name = "Shrek"
             };
 
-            return View(movie);
+            var customers = new List<Customer>
+            {
+                new Customer {Name = "Customer 1"},
+                new Customer {Name = "Customer 2"}
+            };
+
+            var viewModel = new RandomMovieViewModel
+            {
+                Customers = customers,
+                Movie = movie
+            };
+
+            return View(viewModel);
         }
 
 
@@ -42,7 +55,7 @@ namespace MovieRentalAppMVC.Controllers
                 float, 
                 guid (GUID is a 16 byte binary SQL Server data type that is globally unique across tables, databases, and servers.)
 
-        */
+        
                 [Route("movies/released/{year:regex(\\d{4})}/{month:regex(\\d{2}):range(1,12)}")]
                 public ActionResult ByReleaseDate(int year, int month)
                 {
@@ -50,7 +63,7 @@ namespace MovieRentalAppMVC.Controllers
                     return Content(string.Format("year = {0} and month = {1}", year, month));
                 }
     
-
+        */
 
         /*
                 MULTIPLE PARAMETERS
