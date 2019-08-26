@@ -22,6 +22,35 @@ namespace MovieRentalAppMVC.Controllers
 
 
 
+        /*
+                CUSTOM ROUTE NEW WAY , ATTRIBUTE ROUTES
+                In order to sent multiple parapeters in URL we need costom routes. 
+                To do so we need to add custom routes in RoutesConfig, look over there to see an example.
+                We can use the old school way: routes.MapRoute() 
+                or
+                the new way routes.MapMvcArrtibuteRoutes(). Both are presented in RoutesConfig.cs
+/*
+                
+                NOTE:
+                COONSTRAINS example: 
+                min, 
+                max, 
+                range, 
+                minlenght, 
+                maxlengh, 
+                int, 
+                float, 
+                guid (GUID is a 16 byte binary SQL Server data type that is globally unique across tables, databases, and servers.)
+
+        */
+                [Route("movies/released/{year:regex(\\d{4})}/{month:regex(\\d{2}):range(1,12)}")]
+                public ActionResult ByReleaseDate(int year, int month)
+                {
+
+                    return Content(string.Format("year = {0} and month = {1}", year, month));
+                }
+    
+
 
         /*
                 MULTIPLE PARAMETERS
@@ -29,7 +58,7 @@ namespace MovieRentalAppMVC.Controllers
                 To do so we need to add custom routes in RoutesConfig.
                 We can use the old scool way: routes.MapRoute() or the new way routes.MapMvcArrtibuteRoutes(). 
                 Both are shown in RoutesConfig.cs
-        */
+        
 
                 //GET: Movies/Released/1999/3
                 public ActionResult ByReleaseDate(int year, int month)
@@ -37,7 +66,8 @@ namespace MovieRentalAppMVC.Controllers
 
                     return Content(string.Format("year = {0} and month = {1}", year, month)) ;
                 }
-        
+        */
+
 
 
         /*
