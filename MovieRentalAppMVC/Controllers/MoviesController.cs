@@ -10,28 +10,46 @@ namespace MovieRentalAppMVC.Controllers
 {
     public class MoviesController : Controller
     {
-        // GET: Movies
-        public ActionResult Random()
+        
+        //GET: Movies
+        public ActionResult Index()
         {
-            var movie = new Movie()
-            {
-                Name = "Shrek"
-            };
+            var movies = GetAllMovies();
 
-            var customers = new List<Customer>
-            {
-                new Customer {Name = "Customer 1"},
-                new Customer {Name = "Customer 2"}
-            };
-
-            var viewModel = new RandomMovieViewModel
-            {
-                Customers = customers,
-                Movie = movie
-            };
-
-            return View(viewModel);
+            return View(movies);
         }
+
+
+        public ActionResult Details(int id)
+        {
+            var movie = GetAllMovies().SingleOrDefault(m => m.Id == id);
+
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(movie);
+        }
+
+
+            
+        //Helper method to create list of Movies
+        private IEnumerable<Movie> GetAllMovies()
+        {
+            var movies = new List<Movie>
+            {
+                new Movie { Id = 1, Name = "Shrek" },
+                new Movie { Id = 2, Name = "Skrek 2"},
+                new Movie { Id = 3, Name = "Wall-e"}
+            };
+
+            return movies;
+        }
+
+
+
+        
 
 
 
