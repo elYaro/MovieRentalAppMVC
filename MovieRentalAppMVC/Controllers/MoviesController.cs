@@ -2,6 +2,7 @@
 using MovieRentalAppMVC.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,11 +11,24 @@ namespace MovieRentalAppMVC.Controllers
 {
     public class MoviesController : Controller
     {
-        
+        private ApplicationDbContext _context;
+
+        public MoviesController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
+
         //GET: Movies
         public ActionResult Index()
         {
-            var movies = GetAllMovies();
+            //var movies = GetAllMovies();
+            var movies = _context.Movies.Include(m => m.Genre).ToList();
 
             return View(movies);
         }
@@ -22,7 +36,8 @@ namespace MovieRentalAppMVC.Controllers
 
         public ActionResult Details(int id)
         {
-            var movie = GetAllMovies().SingleOrDefault(m => m.Id == id);
+            //var movie = GetAllMovies().SingleOrDefault(m => m.Id == id);
+            var movie = _context.Movies.Include(m => m.Genre).SingleOrDefault(m => m.Id == id);
 
             if (movie == null)
             {
@@ -33,7 +48,7 @@ namespace MovieRentalAppMVC.Controllers
         }
 
 
-            
+        /*    
         //Helper method to create list of Movies
         private IEnumerable<Movie> GetAllMovies()
         {
@@ -46,6 +61,7 @@ namespace MovieRentalAppMVC.Controllers
 
             return movies;
         }
+        */
 
 
 
