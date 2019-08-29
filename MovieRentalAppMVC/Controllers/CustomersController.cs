@@ -24,6 +24,23 @@ namespace MovieRentalAppMVC.Controllers
         }
 
 
+
+        //Action for CREATE customer which is saving the customer passed from form to the Db
+        //instead of passing as a parapeter to Create action (NewCustomerViewModel viewModel) we pass (Customer customer). It is called MODEL BINDING
+        [HttpPost]
+        public ActionResult Create(Customer customer)
+        {
+            _context.Customers.Add(customer);
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Customers");
+        }
+
+
+
+
+
         // Action for creating the new customer, returning the view with form
         public ActionResult New()
         {
