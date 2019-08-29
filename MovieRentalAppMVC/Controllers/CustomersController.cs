@@ -25,8 +25,34 @@ namespace MovieRentalAppMVC.Controllers
 
 
 
+        //Edit Action
+        public ActionResult Edit(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+
+            var viewModel = new CustomerFormViewModel
+            {
+                Customer = customer,
+                MembershipTypes = _context.MembershipTypes.ToList()
+            };
+
+            return View("CustomerForm", viewModel);
+
+
+        }
+
+
+
+
+
+
         //Action for CREATE customer which is saving the customer passed from form to the Db
-        //instead of passing as a parapeter to Create action (NewCustomerViewModel viewModel) we pass (Customer customer). It is called MODEL BINDING
+        //instead of passing as a parapeter to Create action (CustomerFormViewModel) we pass (Customer customer). It is called MODEL BINDING
         [HttpPost]
         public ActionResult Create(Customer customer)
         {
@@ -46,13 +72,13 @@ namespace MovieRentalAppMVC.Controllers
         {
             var membershipTypes = _context.MembershipTypes.ToList();
 
-            var viewModel = new NewCustomerViewModel
+            var viewModel = new CustomerFormViewModel
             {
                 MembershipTypes = membershipTypes
 
             };
 
-            return View(viewModel);
+            return View("CustomerForm", viewModel);
         }
         
         
