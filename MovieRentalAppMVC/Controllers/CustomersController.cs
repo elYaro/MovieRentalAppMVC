@@ -1,4 +1,5 @@
 ﻿using MovieRentalAppMVC.Models;
+using MovieRentalAppMVC.ViewModels;
 using System.Data.Entity;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,25 @@ namespace MovieRentalAppMVC.Controllers
             _context.Dispose();    
         }
 
+
+        // Action for creating the new customer, returning the view with form
+        public ActionResult New()
+        {
+            var membershipTypes = _context.MembershipTypes.ToList();
+
+            var viewModel = new NewCustomerViewModel
+            {
+                MembershipTypes = membershipTypes
+
+            };
+
+            return View(viewModel);
+        }
+        
+        
+        
+        
+        
         // GET: Customers
         public ActionResult Index()
         {
