@@ -32,15 +32,12 @@ else
     </div>
 
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Movie.DateAdded)
-        @Html.TextBoxFor(m => m.Movie.DateAdded, "{0:d MMM yyyy}", new { @class = "form-control" })
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Movie.NumberInStock)
-        @Html.TextBoxFor(m => m.Movie.NumberInStock, new { @class = "form-control" })
-    </div>
+    @*<div class="form-group">
+            @Html.LabelFor(m => m.Movie.DateAdded)
+            @Html.TextBoxFor(m => m.Movie.DateAdded, "{0:d MMM yyyy}", new { @class = "form-control" })
+        </div>
+    *@
 
 
     <div class="form-group">
@@ -48,7 +45,16 @@ else
         @Html.DropDownListFor(m => m.Movie.GenreId, new SelectList(Model.Genres, "Id", "Name"), "SelectList Genre", new { @class = "form-control" })
     </div>
 
-    <button class="btn btn-primary">Save</button>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.NumberInStock)
+        @Html.TextBoxFor(m => m.Movie.NumberInStock, new { @class = "form-control" })
+    </div>
+
+
+    @Html.HiddenFor(m => m.Movie.Id)
+
+    <button type="submit" class="btn btn-primary">Save</button>
 
 
 

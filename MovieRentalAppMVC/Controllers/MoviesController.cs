@@ -25,11 +25,44 @@ namespace MovieRentalAppMVC.Controllers
 
 
 
+
+        //Action for CREATE movie which is saving the movie passed from form to the Db
+        //instead of passing as a parameter to Create action (MovieFormViewModel) we pass (Movie movie). It is called MODEL BINDING
+        //In order to use this action for both : creating a new movie and editing existing movie I have renamed the action from Create to Save and added some logic to an action (if movie id == 0 then create the movie, otherweise edit an existing movie
+        [HttpPost]
+        public ActionResult Save(Movie movie)
+        {
+            if (movie.Id == 0)
+            {
+                movie.DateAdded = DateTime.Now;
+                _context.Movies.Add(movie);
+            }
+            else
+            {
+                var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
+
+                movieInDb.Name = movie.Name;
+                movieInDb.ReleaseDate = movie.ReleaseDate;
+                movieInDb.NumberInStock = movie.NumberInStock;
+                movieInDb.GenreId = movie.GenreId;
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Movies");
+
+        }
+
+
+
+
+
+        // Action for creating the new customer, returning the view with form
         public ActionResult New()
         {
             var viewModel = new MovieFormViewModel
             {
-                Genres = _context.Genres
+                Genres = _context.Genres.ToList()
             };
 
             return View("MovieForm", viewModel);
@@ -54,11 +87,7 @@ namespace MovieRentalAppMVC.Controllers
             };
            
 
-            return View("MovieForm", viewModel);
-
-
-
-            
+            return View("MovieForm", viewModel); 
         }
 
 
@@ -71,7 +100,9 @@ namespace MovieRentalAppMVC.Controllers
             return View(movies);
         }
 
-
+        
+        
+        //GET: Movies/Details/1
         public ActionResult Details(int id)
         {
             //var movie = GetAllMovies().SingleOrDefault(m => m.Id == id);
