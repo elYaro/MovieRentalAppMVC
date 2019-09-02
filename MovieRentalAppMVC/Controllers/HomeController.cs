@@ -15,14 +15,14 @@ namespace MovieRentalAppMVC.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "A few words about this project.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "You can reach me under one of the following:";
 
             return View();
         }
