@@ -24,6 +24,19 @@ namespace MovieRentalAppMVC.Controllers
         }
 
 
+
+        public ActionResult New()
+        {
+            var viewModel = new MovieFormViewModel
+            {
+                Genres = _context.Genres
+            };
+
+            return View("MovieForm", viewModel);
+        }
+
+
+
         //Edit Action
         public ActionResult Edit(int id)
         {
