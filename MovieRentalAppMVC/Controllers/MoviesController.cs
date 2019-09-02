@@ -50,7 +50,7 @@ namespace MovieRentalAppMVC.Controllers
             var viewModel = new MovieFormViewModel
             {
                 Movie = movie,
-                //Genres = _context.Genres.ToList()
+                Genres = _context.Genres.ToList()
             };
            
 
