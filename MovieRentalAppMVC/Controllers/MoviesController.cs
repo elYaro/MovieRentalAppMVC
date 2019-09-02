@@ -24,6 +24,13 @@ namespace MovieRentalAppMVC.Controllers
         }
 
 
+
+        public ActionResult Edit(int id)
+        {
+            return View("MovieForm");
+        }
+
+
         //GET: Movies
         public ActionResult Index()
         {
