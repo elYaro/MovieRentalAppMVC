@@ -18,6 +18,9 @@ else
 
 @using (Html.BeginForm("Save", "Customers"))
 {
+    //@Html.ValidationSummary()
+    @Html.ValidationSummary(true, "Please correct following fields")
+
     <div class="form-group">
         @Html.LabelFor(c => c.Customer.Name)
         @Html.TextBoxFor(c => c.Customer.Name, new { @class = "form-control" })
