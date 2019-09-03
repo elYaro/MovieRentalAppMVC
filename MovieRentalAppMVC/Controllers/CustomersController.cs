@@ -57,6 +57,22 @@ namespace MovieRentalAppMVC.Controllers
         [HttpPost]
         public ActionResult Save(Customer customer)
         {
+            //VALIDATION ACTION PARAPETER: customer
+            //1st steep: add data annotations to properties in Domain Model
+            //2nd steep: use ModelState.IsValid to change the flow of the program
+            //3rd steep: add validation messages to the form @Html.ValidationMassageFor(c => c.Name)
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CustomerFormViewModel
+                {
+                    Customer = customer,
+                    MembershipTypes = _context.MembershipTypes.ToList()
+                };
+
+                return View("CustomerForm", viewModel);
+            }
+
+
             if (customer.Id == 0)
             {
                 _context.Customers.Add(customer);
