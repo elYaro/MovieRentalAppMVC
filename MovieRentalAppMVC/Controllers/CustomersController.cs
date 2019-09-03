@@ -130,7 +130,8 @@ namespace MovieRentalAppMVC.Controllers
 
             var viewModel = new CustomerFormViewModel
             {
-                MembershipTypes = membershipTypes
+                MembershipTypes = membershipTypes,
+                Customer = new Customer(),
 
             };
 
