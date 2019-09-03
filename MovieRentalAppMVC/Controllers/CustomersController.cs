@@ -55,6 +55,7 @@ namespace MovieRentalAppMVC.Controllers
         //instead of passing as a parameter to Create action (CustomerFormViewModel) we pass (Customer customer). It is called MODEL BINDING
         //In order to use this action for both : creating a new customer and editing existing customer I have renamed the action from Create to Save and added some logic to an action (if customer id == 0 then create the customer, otherweise edit an existing customer
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)
         {
             //VALIDATION ACTION PARAPETER: customer
