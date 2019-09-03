@@ -20,6 +20,7 @@ namespace MovieRentalAppMVC.Models
         [Display(Name = "Date of Adding")]
         public DateTime DateAdded { get; set; }
 
+        [Range(1,30)]
         [Display(Name = "Number in Stock")]
         public byte NumberInStock { get; set; }
 

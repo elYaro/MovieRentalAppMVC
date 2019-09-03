@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (Model.Customer==null )
+@if (Model.Customer.Id == 0 )
 {
     <h2>New Customer</h2>
 }
@@ -18,8 +18,8 @@ else
 
 @using (Html.BeginForm("Save", "Customers"))
 {
-    //@Html.ValidationSummary()
-    @Html.ValidationSummary(true, "Please correct following fields")
+    @Html.ValidationSummary()
+    //@Html.ValidationSummary(true, "Please correct following fields")
 
     <div class="form-group">
         @Html.LabelFor(c => c.Customer.Name)

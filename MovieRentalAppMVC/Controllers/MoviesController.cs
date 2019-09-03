@@ -30,8 +30,23 @@ namespace MovieRentalAppMVC.Controllers
         //instead of passing as a parameter to Create action (MovieFormViewModel) we pass (Movie movie). It is called MODEL BINDING
         //In order to use this action for both : creating a new movie and editing existing movie I have renamed the action from Create to Save and added some logic to an action (if movie id == 0 then create the movie, otherweise edit an existing movie
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MovieFormViewModel(movie)
+                {
+                    //Movie = movie,
+                    Genres = _context.Genres.ToList()
+                };
+
+                return View("MovieForm", viewModel);
+            }
+
+            
+            
+
             if (movie.Id == 0)
             {
                 movie.DateAdded = DateTime.Now;
@@ -60,9 +75,11 @@ namespace MovieRentalAppMVC.Controllers
         // Action for creating the new customer, returning the view with form
         public ActionResult New()
         {
-            var viewModel = new MovieFormViewModel
+            var viewModel = new MovieFormViewModel()
             {
-                Genres = _context.Genres.ToList()
+                Genres = _context.Genres.ToList(),
+                //Movie = new Movie()
+                
             };
 
             return View("MovieForm", viewModel);
@@ -80,10 +97,17 @@ namespace MovieRentalAppMVC.Controllers
                 return HttpNotFound();
             }
            
-            var viewModel = new MovieFormViewModel
+            var viewModel = new MovieFormViewModel(movie)
             {
-                Movie = movie,
-                Genres = _context.Genres.ToList()
+                //Movie = movie,
+
+                //Id = movie.Id,
+                //Name = movie.Name,
+                //ReleaseDate = movie.ReleaseDate,
+                //GenreId = movie.GenreId,
+                //NumberInStock = movie.NumberInStock,
+
+            Genres = _context.Genres.ToList()
             };
            
 
