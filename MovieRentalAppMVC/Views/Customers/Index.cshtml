@@ -7,7 +7,7 @@
 
 <h2>Customers</h2>
 
-@Html.ActionLink("+ Add Customer", "New", "Customer", new { @class = "btn btn-primary"})
+@Html.ActionLink("+ Add Customer", "New", "Customer", new { @class = "btn btn-primary" })
 <p></p>
 
 @if (!Model.Any())
@@ -16,11 +16,12 @@
 }
 else
 {
-    <table class="table table-bordered table-hover">
+    <table id="customersTable" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Customer</th>
                 <th>Membership Type</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -29,17 +30,75 @@ else
                 <tr>
                     <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id }, null)</td>
                     <td>@customer.MembershipType.Name</td>
+                    <td>
+                        <button data-customer-id="@customer.Id" class="js-delete btn-link">Delete</button>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
 }
 
+@*Using JQuery and Ajax on the client side to delete row from the table*@
+
+@* ****** STEEP 1 ******
+       <script>
+           $(document).ready(function () {
+               $("#customersTable .js-delete").on("click", function () {
+                   confirm("Are you sure?")
+               });
+           });
+       </script>
 
 
+    ****** STEEP 2 ******
+       <script>
+           $(document).ready(function () {
+               $("#customersTable .js-delete").on("click", function () {
+                   if (confirm("Are you sure?")) {
+                       console.log("check in console")
+                   }
+               })
+           });
+       </script>
 
+     ****** STEEP 3 ******
+    <script>
+        $(document).ready(function () {
+            $("#customersTable .js-delete").on("click", function () {
+                if (confirm("Are you sure?")) {
+                    $.ajax({
+                        url: "/api/customers/" + $(this).attr("data-customer-id"),
+                        method: "DELETE",
+                        success: function () {
+                            console.log("success");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 
+    ****** STEEP 4 BELOW ******
+*@
 
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#customersTable .js-delete").on("click", function () {
+                var button = $(this);
 
-
-
+                if (confirm("Are you sure?")) {
+                    $.ajax({
+                        url: "/api/customers/" + button.attr("data-customer-id"),
+                        method: "DELETE",
+                        success: function () {
+                            button.parents("tr").remove();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
