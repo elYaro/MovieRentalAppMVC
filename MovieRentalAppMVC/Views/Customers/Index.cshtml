@@ -79,11 +79,7 @@ else
         });
     </script>
 
-    ****** STEEP 4 BELOW ******
-*@
-
-@section scripts
-{
+    ****** STEEP 4 ******
     <script>
         $(document).ready(function () {
             $("#customersTable .js-delete").on("click", function () {
@@ -101,4 +97,34 @@ else
             });
         });
     </script>
+
+
+    ****** STEEP 5 ******
+
+*@
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#customersTable .js-delete").on("click", function () {
+                var button = $(this);
+
+
+                bootbox.confirm("Are you sure?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/customers/" + button.attr("data-customer-id"),
+                            method: "DELETE",
+                            success: function () {
+                                button.parents("tr").remove();
+                            }
+                        });
+                    }
+                })
+                  
+            });
+        });
+    </script>
 }
+
