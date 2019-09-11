@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Data.Entity;
 
 namespace MovieRentalAppMVC.Controllers.Api
 {
@@ -24,7 +25,9 @@ namespace MovieRentalAppMVC.Controllers.Api
         //public IEnumerable<CustomerDto> GetAllCustomers()
         public IHttpActionResult GetAllCustomers()
         {
-            var customers = _context.Customers.ToList();
+            var customers = _context.Customers
+                .Include(c => c.MembershipType)
+                .ToList();
 
             if (customers == null)
             {
