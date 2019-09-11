@@ -10,12 +10,14 @@
 @Html.ActionLink("+ Add Customer", "New", "Customer", new { @class = "btn btn-primary" })
 <p></p>
 
+@*
 @if (!Model.Any())
 {
     <p>We don't have any Customer yet.</p>
 }
 else
 {
+*@
     <table id="customersTable" class="table table-bordered table-hover">
         <thead>
             <tr>
@@ -25,6 +27,7 @@ else
             </tr>
         </thead>
         <tbody>
+            @*
             @foreach (var customer in Model)
             {
                 <tr>
@@ -35,9 +38,10 @@ else
                     </td>
                 </tr>
             }
+            *@
         </tbody>
     </table>
-}
+@*}*@
 
 @*Using JQuery and Ajax on the client side to delete row from the table*@
 
@@ -107,7 +111,32 @@ else
 {
     <script>
         $(document).ready(function () {
-            $("#customersTable").DataTable();
+            $("#customersTable").DataTable({
+                ajax : {
+                    url: "/api/customers/",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (data, type, customer) {
+                            return "<a href = '/customers/edit/" + customer.id + "'>" + customer.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class = 'btn-link js-delete' data-customer-id =" + data + ">Delete</button>";
+                        }
+                        
+
+                    }
+                    
+                ]
+            });
 
 
             $("#customersTable").on("click", ".js-delete", function () {
