@@ -119,9 +119,11 @@ namespace MovieRentalAppMVC.Controllers
         public ActionResult Index()
         {
             //var movies = GetAllMovies();
-            var movies = _context.Movies.Include(m => m.Genre).ToList();
+            // var movies = _context.Movies.Include(m => m.Genre).ToList();
 
-            return View(movies);
+            //return View(movies);
+            return View();
+
         }
 
         
