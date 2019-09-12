@@ -138,11 +138,11 @@ namespace MovieRentalAppMVC.Controllers
 
             return View("CustomerForm", viewModel);
         }
-        
-        
-        
-        
-        
+
+
+
+
+
         // GET: Customers
         public ActionResult Index()
         {
