@@ -122,7 +122,11 @@ namespace MovieRentalAppMVC.Controllers
             // var movies = _context.Movies.Include(m => m.Genre).ToList();
 
             //return View(movies);
-            return View();
+
+            if (User.IsInRole("CanManageMovies"))
+                return View();
+
+            return View("ReadOnlyIndex");
 
         }
 
