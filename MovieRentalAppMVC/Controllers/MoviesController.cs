@@ -31,6 +31,7 @@ namespace MovieRentalAppMVC.Controllers
         //In order to use this action for both : creating a new movie and editing existing movie I have renamed the action from Create to Save and added some logic to an action (if movie id == 0 then create the movie, otherweise edit an existing movie
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "CanManageMovies")]
         public ActionResult Save(Movie movie)
         {
             if (!ModelState.IsValid)
@@ -73,6 +74,7 @@ namespace MovieRentalAppMVC.Controllers
 
 
         // Action for creating the new customer, returning the view with form
+        [Authorize(Roles = "CanManageMovies")]
         public ActionResult New()
         {
             var viewModel = new MovieFormViewModel()
@@ -88,6 +90,7 @@ namespace MovieRentalAppMVC.Controllers
 
 
         //Edit Action
+        [Authorize(Roles = "CanManageMovies")]
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.SingleOrDefault(m=>m.Id == id);
