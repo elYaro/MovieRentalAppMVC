@@ -65,6 +65,10 @@ namespace MovieRentalAppMVC.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Document ID")]
+        public string DocumentId { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

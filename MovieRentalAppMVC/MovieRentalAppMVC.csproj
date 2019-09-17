@@ -249,6 +249,10 @@
     <Compile Include="Migrations\201909141739514_SeedUsers.Designer.cs">
       <DependentUpon>201909141739514_SeedUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909170837497_AddDocumentIdToApplicationUser.cs" />
+    <Compile Include="Migrations\201909170837497_AddDocumentIdToApplicationUser.Designer.cs">
+      <DependentUpon>201909170837497_AddDocumentIdToApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -561,6 +565,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909141739514_SeedUsers.resx">
       <DependentUpon>201909141739514_SeedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909170837497_AddDocumentIdToApplicationUser.resx">
+      <DependentUpon>201909170837497_AddDocumentIdToApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
