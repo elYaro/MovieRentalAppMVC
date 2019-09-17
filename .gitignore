@@ -264,3 +264,4 @@ __pycache__/
 # Other Files
 .gitignore
 .gitattributes
+AppSettings.config

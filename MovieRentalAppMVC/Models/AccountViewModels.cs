@@ -8,6 +8,11 @@ namespace MovieRentalAppMVC.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Document ID")]
+        public string DocumentId { get; set; }
+
     }
 
     public class ExternalLoginListViewModel
