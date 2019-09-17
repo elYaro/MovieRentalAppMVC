@@ -10,8 +10,15 @@ namespace MovieRentalAppMVC.Models
         public string Email { get; set; }
 
         [Required]
+        [StringLength(10)]
         [Display(Name = "Document ID")]
         public string DocumentId { get; set; }
+
+        [Required]
+        [StringLength(9)]
+        [Display(Name = "Mobile Phone Number")]
+        public string Phone { get; set; }
+
 
     }
 
@@ -70,8 +77,14 @@ namespace MovieRentalAppMVC.Models
     public class RegisterViewModel
     {
         [Required]
+        [StringLength(10)]
         [Display(Name = "Document ID")]
         public string DocumentId { get; set; }
+
+        [Required]
+        [StringLength(9)]
+        [Display(Name = "Mobile Phone Number")]
+        public string Phone { get; set; }
 
         [Required]
         [EmailAddress]

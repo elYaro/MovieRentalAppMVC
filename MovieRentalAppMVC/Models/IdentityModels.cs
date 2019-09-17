@@ -14,6 +14,11 @@ namespace MovieRentalAppMVC.Models
         [StringLength(10)]
         public string DocumentID { get; set; }
 
+        [Required]
+        [StringLength(9)]
+        public string Phone { get; set; }
+
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

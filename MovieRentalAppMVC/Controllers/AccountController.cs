@@ -156,7 +156,9 @@ namespace MovieRentalAppMVC.Controllers
                 var user = new ApplicationUser {
                     UserName = model.Email,
                     Email = model.Email,
-                    DocumentID = model.DocumentId
+                    DocumentID = model.DocumentId,
+                    Phone = model.Phone
+                    
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

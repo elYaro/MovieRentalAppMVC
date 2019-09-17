@@ -253,6 +253,14 @@
     <Compile Include="Migrations\201909170837497_AddDocumentIdToApplicationUser.Designer.cs">
       <DependentUpon>201909170837497_AddDocumentIdToApplicationUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909171429522_AddPhoneToApplicationUser.cs" />
+    <Compile Include="Migrations\201909171429522_AddPhoneToApplicationUser.Designer.cs">
+      <DependentUpon>201909171429522_AddPhoneToApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909171928123_AddPhoneToApplicationUser1.cs" />
+    <Compile Include="Migrations\201909171928123_AddPhoneToApplicationUser1.Designer.cs">
+      <DependentUpon>201909171928123_AddPhoneToApplicationUser1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -569,6 +577,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909170837497_AddDocumentIdToApplicationUser.resx">
       <DependentUpon>201909170837497_AddDocumentIdToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909171429522_AddPhoneToApplicationUser.resx">
+      <DependentUpon>201909171429522_AddPhoneToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909171928123_AddPhoneToApplicationUser1.resx">
+      <DependentUpon>201909171928123_AddPhoneToApplicationUser1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
