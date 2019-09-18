@@ -288,6 +288,18 @@
     <Compile Include="Migrations\201909181757380_correctedPropertyNameInRentalClass.Designer.cs">
       <DependentUpon>201909181757380_correctedPropertyNameInRentalClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909181931235_AddNumberAvailableToMovieModel.cs" />
+    <Compile Include="Migrations\201909181931235_AddNumberAvailableToMovieModel.Designer.cs">
+      <DependentUpon>201909181931235_AddNumberAvailableToMovieModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909181936497_AddNumberAvailableToMovieModel1.cs" />
+    <Compile Include="Migrations\201909181936497_AddNumberAvailableToMovieModel1.Designer.cs">
+      <DependentUpon>201909181936497_AddNumberAvailableToMovieModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909181939399_seedingNumberAvailableValues.cs" />
+    <Compile Include="Migrations\201909181939399_seedingNumberAvailableValues.Designer.cs">
+      <DependentUpon>201909181939399_seedingNumberAvailableValues.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -619,6 +631,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909181757380_correctedPropertyNameInRentalClass.resx">
       <DependentUpon>201909181757380_correctedPropertyNameInRentalClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909181931235_AddNumberAvailableToMovieModel.resx">
+      <DependentUpon>201909181931235_AddNumberAvailableToMovieModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909181936497_AddNumberAvailableToMovieModel1.resx">
+      <DependentUpon>201909181936497_AddNumberAvailableToMovieModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909181939399_seedingNumberAvailableValues.resx">
+      <DependentUpon>201909181939399_seedingNumberAvailableValues.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

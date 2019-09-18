@@ -24,7 +24,8 @@ namespace MovieRentalAppMVC.Models
         [Display(Name = "Number in Stock")]
         public byte NumberInStock { get; set; }
 
-        
+        public byte NumberAvailable { get; set; }
+
         public Genre Genre { get; set; }
 
         [Required]
