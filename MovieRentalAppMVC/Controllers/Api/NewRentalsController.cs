@@ -17,13 +17,39 @@ namespace MovieRentalAppMVC.Controllers.Api
         [HttpPost]
         public IHttpActionResult CreateNewRental (NewRentalDto newRental)
         {
-            
-            var customer = _context.Customers.Single(c => c.Id == newRental.CustomerId);
+            //2nd Edge Case: no movies in the Dto
+            if (newRental.MovieIdsList.Count == 0)
+            {
+                return BadRequest("No Movie Ids have been given");
+            }
 
-            var movies = _context.Movies.Where(m => newRental.MovieIdsList.Contains(m.Id));
+
+            //1st Edge Case: customer is not valid
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == newRental.CustomerId);
+
+            if (customer == null)
+            {
+                return BadRequest("Customer Id is not valid");
+            }
+
+
+            var movies = _context.Movies.Where(m => newRental.MovieIdsList.Contains(m.Id)).ToList();
+
+            //3rd Edge Case: one or more movies are invalid
+            if (movies.Count != newRental.MovieIdsList.Count)
+            {
+                return BadRequest("One or more movies are invalid");
+            }
 
             foreach (var movie in movies)
             {
+
+                //4th Edge Case: in movie is no longer available
+                if (movie.NumberAvailable == 0)
+                {
+                    return BadRequest("Movie is not available");
+                }
+
                 movie.NumberAvailable--;
 
                 var rental = new Rental
