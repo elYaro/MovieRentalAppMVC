@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "New Rental Form";
+    //we don't need this line below with Layout because in _ViewStart.cshtml there is this line and will be used in every view
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@* Comment 1:
+    before in CustomersForme we used :
+    @using (Html.BeginForm("Save", "Customers")) Thise method will get url for this action and write behing the seens : <form action = "/Customers/Save/">. 
+    But in this case we will not use the action attribute here
+    Now we will not use it, because It will create the traditional HTML Form
+    instead we will use row HTML like <form>
+
+    In MVS there is also a helper method called 
+    @Ajax.BeginForm()
+    but this method is designed to call actions in mvc controller not api controllers
+    And thats why we decide to use row html
+
+    zencoding - method to quicly create markups
+*@
+
+<h2>New Rental Form</h2>
+
+
+<form>
+    <div class="form-group">
+        <label>Customer</label>
+        <input type="text" value="" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Movie</label>
+        <input type="text" value="" class="form-control" />
+    </div>
+
+    <button class="btn btn-primary">Submit</button>
+</form>
