@@ -23,20 +23,27 @@ namespace MovieRentalAppMVC.Controllers.Api
 
         //GET: /api/customers
         //public IEnumerable<CustomerDto> GetAllCustomers()
-        public IHttpActionResult GetAllCustomers()
+        public IHttpActionResult GetAllCustomers(string query = null)
         {
-            var customers = _context.Customers
-                .Include(c => c.MembershipType)
+            var customersQuery = _context.Customers
+                .Include(c => c.MembershipType);
+
+            if (!String.IsNullOrWhiteSpace(query))
+            {
+                customersQuery = customersQuery.Where(c => c.Name.Contains(query));
+            }
+
+            var customerDto = customersQuery
                 .ToList();
 
-            if (customers == null)
+            if (customerDto == null)
             {
                 //throw new HttpResponseException(HttpStatusCode.NotFound);
                 return NotFound();
             }
 
             //return customers.Select(Mapper.Map<Customer, CustomerDto>);
-            return Ok(customers.Select(Mapper.Map<Customer, CustomerDto>));
+            return Ok(customerDto.Select(Mapper.Map<Customer, CustomerDto>));
         }
 
 
