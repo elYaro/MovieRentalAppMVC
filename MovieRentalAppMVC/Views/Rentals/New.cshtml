@@ -1,4 +1,5 @@
-﻿
+﻿@model dynamic
+
 @{
     ViewBag.Title = "New Rental Form";
     //we don't need this line below with Layout because in _ViewStart.cshtml there is this line and will be used in every view
@@ -24,13 +25,12 @@
 <h2>New Rental Form</h2>
 
 
-<form>
+<form id="newRental">
     <div class="form-group">
         <label>Customer</label>
         <div class="tt-container"> @*this additional div is to move input field in the next line in view*@
             <input id="customer" type="text" value="" class="form-control" />
         </div>
-        
     </div>
 
     <div class="form-group">
@@ -39,7 +39,6 @@
             @*this additional div is to move input field in the next line in view*@
             <input id="movie" type="text" value="" class="form-control" />
         </div>
-        
     </div>
 
 
@@ -59,7 +58,7 @@
         $(document).ready(function () {
 
             var viewModelOnClient = {
-                movieIds: []
+                movieIdsList: []
             };
 
             var customers = new Bloodhound({
@@ -105,8 +104,24 @@
 
                     $("#movie").typeahead("val", "");
 
-                    viewModelOnClient.movieIds.push(movie.id);
+                    viewModelOnClient.movieIdsList.push(movie.id);
                 });
+
+            $("#newRental").submit(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: "/api/newRentals",
+                    method: "POST",
+                    data: viewModelOnClient
+                })
+                    .done(function () {
+                        console.log("done");
+                    })
+                    .fail(function () {
+
+                    });
+            });
 
 
 

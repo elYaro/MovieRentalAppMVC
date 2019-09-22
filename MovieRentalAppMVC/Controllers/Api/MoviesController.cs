@@ -21,7 +21,7 @@ namespace MovieRentalAppMVC.Controllers.Api
         }
 
         //GET: /api/movies
-        public IHttpActionResult GetAllMovies(string query = null)
+        public IEnumerable<MovieDto> GetAllMovies(string query = null)
         {
             var moviesQuery = _context.Movies
                 .Include(m => m.Genre)
@@ -39,11 +39,11 @@ namespace MovieRentalAppMVC.Controllers.Api
             if (movieDto == null)
             {
                 //throw new HttpResponseException(HttpStatusCode.NotFound);
-                return NotFound();
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
             //return movies;
-            return Ok(movieDto);
+            return movieDto;
         }
 
 

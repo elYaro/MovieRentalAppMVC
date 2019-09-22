@@ -12,6 +12,11 @@ namespace MovieRentalAppMVC.Controllers.Api
     public class NewRentalsController : ApiController
     {
         private ApplicationDbContext _context;
+
+        public NewRentalsController()
+        {
+            _context = new ApplicationDbContext();
+        }
         
         // /api/newrentalscontroller/createnewrental
         [HttpPost]
