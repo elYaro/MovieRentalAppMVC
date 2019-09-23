@@ -110,10 +110,15 @@
                     viewModelOnClient.movieIdsList.push(movie.id);
                 });
 
-            //create custom validator
+            //create custom validator for Customer
             $.validator.addMethod("validCustomer", function () {
                 return viewModelOnClient.customerId && viewModelOnClient.customerId != 0;
             }, "Please select a valid customer.");
+
+            //create custom validator for Movie
+            $.validator.addMethod("atLeastOneMovie", function () {
+                return viewModelOnClient.movieIdsList.length > 0;
+            }, "Please select at least one movie.");
 
 
             $("#newRental").validate({
