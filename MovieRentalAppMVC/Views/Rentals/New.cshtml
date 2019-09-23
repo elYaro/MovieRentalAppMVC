@@ -30,7 +30,7 @@
         <label>Customer</label>
         <div class="tt-container">
             @*this additional div is to move input field in the next line in view*@
-            <input id="customer" required type="text" value="" class="form-control" />
+            <input id="customer" data-rule-validCustomer="true" required type="text" value="" class="form-control" />
         </div>
     </div>
 
@@ -109,6 +109,12 @@
 
                     viewModelOnClient.movieIdsList.push(movie.id);
                 });
+
+            //create custom validator
+            $.validator.addMethod("validCustomer", function () {
+                return viewModelOnClient.customerId && viewModelOnClient.customerId != 0;
+            }, "Please select a valid customer.");
+
 
             $("#newRental").validate({
                 submitHandler : function() {
