@@ -9,12 +9,12 @@
 
 @* Comment 1:
     before in CustomersForme we used :
-    @using (Html.BeginForm("Save", "Customers")) Thise method will get url for this action and write behing the seens : <form action = "/Customers/Save/">. 
+    @using (Html.BeginForm("Save", "Customers")) Thise method will get url for this action and write behing the seens : <form action = "/Customers/Save/">.
     But in this case we will not use the action attribute here
     Now we will not use it, because It will create the traditional HTML Form
     instead we will use row HTML like <form>
 
-    In MVS there is also a helper method called 
+    In MVS there is also a helper method called
     @Ajax.BeginForm()
     but this method is designed to call actions in mvc controller not api controllers
     And thats why we decide to use row html
@@ -28,8 +28,9 @@
 <form id="newRental">
     <div class="form-group">
         <label>Customer</label>
-        <div class="tt-container"> @*this additional div is to move input field in the next line in view*@
-            <input id="customer" type="text" value="" class="form-control" />
+        <div class="tt-container">
+            @*this additional div is to move input field in the next line in view*@
+            <input id="customer" required type="text" value="" class="form-control" />
         </div>
     </div>
 
@@ -43,16 +44,18 @@
 
 
     <div class="row">
-        <div class="col-md-4 col-sm-4"> @*using another bootstram class to make the list dicplay not on entire width of the screen*@
-            <ul id="movies" class="list-group"></ul> 
+        <div class="col-md-4 col-sm-4">
+            @*using another bootstram class to make the list dicplay not on entire width of the screen*@
+            <ul id="movies" class="list-group"></ul>
         </div>
     </div>
-    
+
     <button class="btn btn-primary">Submit</button>
 </form>
 
 @section scripts
     {
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
 
         $(document).ready(function () {
@@ -107,25 +110,25 @@
                     viewModelOnClient.movieIdsList.push(movie.id);
                 });
 
-            $("#newRental").submit(function (e) {
-                e.preventDefault();
+            $("#newRental").validate({
+                submitHandler : function() {
+                    e.preventDefault();
 
-                $.ajax({
-                    url: "/api/newRentals",
-                    method: "POST",
-                    data: viewModelOnClient
-                })
-                    .done(function () {
-                        toastr.success("Rentals successfully recorded.");
+                    $.ajax({
+                        url: "/api/newRentals",
+                        method: "POST",
+                        data: viewModelOnClient
                     })
-                    .fail(function () {
-                        toastr.error("Something unexpected happened.")
-                    });
+                        .done(function () {
+                            toastr.success("Rentals successfully recorded.");
+                        })
+                        .fail(function () {
+                            toastr.error("Something unexpected happened.")
+                        });
+                }
             });
-
-
 
         });
     </script>
 
-    }
+}
