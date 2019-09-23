@@ -30,7 +30,7 @@
         <label>Customer</label>
         <div class="tt-container">
             @*this additional div is to move input field in the next line in view*@
-            <input id="customer" data-rule-validCustomer="true" required type="text" value="" class="form-control" />
+            <input id="customer" name="customer" data-rule-validCustomer="true" required type="text" value="" class="form-control" />
         </div>
     </div>
 
@@ -38,7 +38,7 @@
         <label>Movie</label>
         <div class="tt-container">
             @*this additional div is to move input field in the next line in view*@
-            <input id="movie" type="text" value="" class="form-control" />
+            <input id="movie" name ="movie" data-rule-atLeastOneMovie="true" type="text" value="" class="form-control" />
         </div>
     </div>
 
@@ -121,9 +121,10 @@
             }, "Please select at least one movie.");
 
 
-            $("#newRental").validate({
+            var validator = $("#newRental").validate({
                 submitHandler : function() {
-                    e.preventDefault();
+                    //in order toprevent a form from beeing submitted normally delete the line below and return false.
+                    //e.preventDefault();
 
                     $.ajax({
                         url: "/api/newRentals",
@@ -132,10 +133,23 @@
                     })
                         .done(function () {
                             toastr.success("Rentals successfully recorded.");
+
+                            $("#customer").typeahead("val", "");
+                            $("#movie").typeahead("val", "");
+                            $("#movies").empty();
+
+                            viewModelOnClient = {
+                                movieIdsList: []
+                            };
+
+                            validator.resetForm();
+
                         })
                         .fail(function () {
                             toastr.error("Something unexpected happened.")
                         });
+
+                    return false;
                 }
             });
 
